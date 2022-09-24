@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 2
   SceneName: Game
-  Theme: {fileID: 0}
+  Theme: {fileID: 11400000, guid: bf07e20a14aa3794a8d45198ed686cc1, type: 2}
   LevelPrefab: {fileID: 0}
