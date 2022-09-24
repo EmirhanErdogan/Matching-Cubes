@@ -8,10 +8,10 @@ namespace Emir
         //GENERICS
         public static int DEFAULT_FPS = 60;
         public static int DEFAULT_THREAD_SLEEP_MS = 100;
-        
+
         //INTERFACES
         public static float UI_DEFAULT_FLY_CURRENCY_DURATION = 0.5F;
-        
+
         //SOUNDS
         public static string SFX_CLICK = "CLICK";
         public static string SFX_CURRENCY_FLY = "CURRENCY_FLY";
@@ -23,13 +23,14 @@ namespace Emir
         public static string LEVEL_ID_DATA_KEY = "level_data";
         public static string SOUND_STATE_KEY = "sound_state_data";
         public static string VIBRATION_STATE_KEY = "vibration_state_data";
+        public static string CURRENCY_DATA_KEY = "Currency";
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         public static string EDITOR_LEVELS_PATH = "Levels/";
         public static string EDITOR_GAME_SETTINGS_PATH = "GameSettings";
 
-        #endif
+#endif
     }
 
     public static class GameUtils
@@ -38,16 +39,16 @@ namespace Emir
         {
             Sequence sequence = DOTween.Sequence();
 
-            if(a != null)
+            if (a != null)
                 sequence.Join(a.DOFade(0, duration));
-            if(b != null)
+            if (b != null)
                 sequence.Join(b.DOFade(1, duration));
 
             sequence.OnComplete(() =>
             {
-                if(a != null)
+                if (a != null)
                     a.blocksRaycasts = false;
-                if(b != null)
+                if (b != null)
                     b.blocksRaycasts = true;
             });
 

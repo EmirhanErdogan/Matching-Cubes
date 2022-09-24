@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Emir
 {
@@ -27,7 +29,12 @@ namespace Emir
             
             InitializeWorld();
         }
-        
+
+        private void Update()
+        {
+            Debug.Log(this.gameObject.name);
+        }
+
         /// <summary>
         /// This function helper for initialize world.
         /// </summary>
@@ -46,6 +53,7 @@ namespace Emir
         public void StartGame()
         {
             ChangeGameState(EGameState.STARTED);
+            InterfaceManager.Instance.OnGameStateChanged(GetGameState());
         }
 
         /// <summary>
@@ -91,6 +99,26 @@ namespace Emir
         public GameSettings GetGameSettings()
         {
             return m_gameSettings;
+        }
+
+        /// <summary>
+        /// This Function Helper For Set Currency.
+        /// </summary>
+        /// <param name="currency"></param>
+        public void SetCurrency(int currency)
+        {
+            int Currency= PlayerPrefs.GetInt(CommonTypes.CURRENCY_DATA_KEY)+currency;
+            PlayerPrefs.SetInt(CommonTypes.CURRENCY_DATA_KEY,Currency);
+            PlayerPrefs.Save();
+        }
+
+        /// <summary>
+        /// This Function Returns Related Currency.
+        /// </summary>
+        /// <returns></returns>
+        public int GetCurreny()
+        {
+            return PlayerPrefs.GetInt(CommonTypes.CURRENCY_DATA_KEY);
         }
     
         

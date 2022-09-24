@@ -25,7 +25,6 @@ namespace Emir
         [SerializeField] private CanvasGroup m_menuCanvasGroup;
         [SerializeField] private CanvasGroup m_gameCanvasGroup;
         [SerializeField] private CanvasGroup m_commonCanvasGroup;
-        [SerializeField] private CanvasGroup m_settingsCanvasGroup;
 
         [Header("Prefabs")] 
         [SerializeField] private RectTransform m_currencyPrefab;
@@ -37,28 +36,9 @@ namespace Emir
         /// </summary>
         protected override void Awake()
         {
+            OnGameStateChanged(GameManager.Instance.GetGameState());
+            OnPlayerCurrencyUpdated();
             base.Awake();
-        }
-
-        /// <summary>
-        /// This function helper for change settings panel state.
-        /// </summary>
-        /// <param name="state"></param>
-        public void ChangeSettingsPanelState(bool state)
-        {
-            if(DOTween.IsTweening(m_settingsCanvasGroup.GetInstanceID()))
-                return;
-            
-            Sequence sequence = DOTween.Sequence();
-
-            sequence.Join(m_settingsCanvasGroup.DOFade(state ? 1 : 0, 0.25F));
-            sequence.OnComplete(() =>
-            {
-                m_settingsCanvasGroup.blocksRaycasts = state;
-            });
-
-            sequence.SetId(m_settingsCanvasGroup.GetInstanceID());
-            sequence.Play();
         }
 
         /// <summary>
@@ -84,9 +64,6 @@ namespace Emir
             });
 
             sequence.Play();
-            
-            // SoundManager.Instance.Play(CommonTypes.SFX_CURRENCY_FLY);
-            // VibrationManager.Instance.Haptic(HapticTypes.Success);
         }
         
         /// <summary>
@@ -110,71 +87,65 @@ namespace Emir
             });
 
             sequence.Play();
-            
-            // SoundManager.Instance.Play(CommonTypes.SFX_CURRENCY_FLY);
-            // VibrationManager.Instance.Haptic(HapticTypes.Success);
         }
-    //
-    //     /// <summary>
-    //     /// This function called when game state changed.
-    //     /// </summary>
-    //     /// <param name="e"></param>
-    //     private void OnGameStateChanged(GameStateChangedEvent e)
-    //     {
-    //         switch (e.GameState)
-    //         {
-    //             case EGameState.STAND_BY:
-    //
-    //                 m_levelText.text = $"Level {LevelService.GetCachedLevel(1)}";
-    //                 
-    //                 break;
-    //             case EGameState.STARTED:
-    //                 
-    //                 GameUtils.SwitchCanvasGroup(m_menuCanvasGroup, m_gameCanvasGroup);
-    //                 
-    //                 break;
-    //             case EGameState.WIN:
-    //
-    //                 m_winPanel.Initialize();
-    //
-    //                 break;
-    //             case EGameState.LOSE:
-    //                 
-    //                 m_losePanel.Initialize();
-    //                 
-    //                 break;
-    //         }
-    //     }
-    //     
-    //     /// <summary>
-    //     /// This function called when player currency updated.
-    //     /// </summary>
-    //     /// <param name="e"></param>
-    //     private void OnPlayerCurrencyUpdated(CurrencyUpdatedEvent e)
-    //     {
-    //         string currencyText = m_currencyText.text;
-    //
-    //         currencyText = currencyText.Replace(".", String.Empty);
-    //         currencyText = currencyText.Replace(",", String.Empty);
-    //         
-    //         int cachedCurrency = int.Parse(currencyText);
-    //
-    //         float delay = e.UIDelay;
-    //         float duration = e.UIDuration == -1 ? CommonTypes.UI_DEFAULT_FLY_CURRENCY_DURATION : e.UIDuration;
-    //         
-    //         Sequence sequence = DOTween.Sequence();
-    //
-    //         sequence.Join(DOTween.To(() => cachedCurrency, x => cachedCurrency = x, e.Currency, duration).SetDelay(delay));
-    //
-    //         sequence.OnUpdate(() =>
-    //         {
-    //             m_currencyText.text = $"{cachedCurrency.ToString("N0").Replace(",",String.Empty)}";
-    //         });
-    //
-    //         sequence.SetId(m_currencyText.GetInstanceID());
-    //         sequence.Play();
-    //     }
-    //     
+    
+    /// <summary>
+    /// This function called when game state changed.
+    /// </summary>
+    /// <param name="e"></param>
+    public void OnGameStateChanged(EGameState GameState)
+    {
+        switch (GameState)
+        {
+            case EGameState.STAND_BY:
+    
+                m_levelText.text = $"Level {LevelService.GetCachedLevel(1)}";
+                
+                break;
+            case EGameState.STARTED:
+                
+                GameUtils.SwitchCanvasGroup(m_menuCanvasGroup, m_gameCanvasGroup);
+                
+                break;
+            case EGameState.WIN:
+    
+                // m_winPanel.Initialize();
+    
+                break;
+            case EGameState.LOSE:
+                
+                // m_losePanel.Initialize();
+                
+                break;
+        }
+    }
+    
+    /// <summary>
+    /// This function called when player currency updated.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnPlayerCurrencyUpdated()
+    {
+        string currencyText = m_currencyText.text;
+    
+        currencyText = currencyText.Replace(".", String.Empty);
+        currencyText = currencyText.Replace(",", String.Empty);
+        
+        int cachedCurrency = int.Parse(currencyText);
+
+        Sequence sequence = DOTween.Sequence();
+    
+        sequence.Join(DOTween.To(() => cachedCurrency, x => cachedCurrency = x, GameManager.Instance.GetCurreny(), CommonTypes.UI_DEFAULT_FLY_CURRENCY_DURATION));
+    
+        sequence.OnUpdate(() =>
+        {
+            m_currencyText.text = $"{cachedCurrency.ToString("N0").Replace(",",String.Empty)}";
+        });
+    
+        sequence.SetId(m_currencyText.GetInstanceID());
+        sequence.Play();
+    }
+    
     }  
 }
 
