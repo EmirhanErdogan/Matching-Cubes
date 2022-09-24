@@ -1,25 +1,23 @@
-using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Emir
 {
     public class GameManager : Singleton<GameManager>
     {
         #region Serializable Fields
-
+        
         [Header("Controllers")] 
         [SerializeField] private GameSettings m_gameSettings;
-
+        
         [SerializeField] private PlayerView m_playerView;
         
         #endregion
         #region Private Fields
-
+        
         private EGameState gameState = EGameState.NONE;
-    
+        
         #endregion
-
+        
         /// <summary>
         /// Start.
         /// </summary>
@@ -29,12 +27,7 @@ namespace Emir
             
             InitializeWorld();
         }
-
-        private void Update()
-        {
-            Debug.Log(this.gameObject.name);
-        }
-
+        
         /// <summary>
         /// This function helper for initialize world.
         /// </summary>
@@ -46,7 +39,7 @@ namespace Emir
             
             ChangeGameState(EGameState.STAND_BY);
         }
-
+        
         /// <summary>
         /// This function helper for start game.
         /// </summary>
@@ -55,7 +48,7 @@ namespace Emir
             ChangeGameState(EGameState.STARTED);
             InterfaceManager.Instance.OnGameStateChanged(GetGameState());
         }
-
+        
         /// <summary>
         /// This function helper for change current game state.
         /// </summary>
@@ -73,7 +66,7 @@ namespace Emir
             
             this.gameState = gameState;
         }
-
+        
         /// <summary>
         /// This function returns related game state.
         /// </summary>
@@ -91,7 +84,7 @@ namespace Emir
         {
             return m_playerView;
         }
-
+        
         /// <summary>
         /// This function returns related game settings.
         /// </summary>
@@ -100,7 +93,7 @@ namespace Emir
         {
             return m_gameSettings;
         }
-
+        
         /// <summary>
         /// This Function Helper For Set Currency.
         /// </summary>
@@ -111,7 +104,7 @@ namespace Emir
             PlayerPrefs.SetInt(CommonTypes.CURRENCY_DATA_KEY,Currency);
             PlayerPrefs.Save();
         }
-
+        
         /// <summary>
         /// This Function Returns Related Currency.
         /// </summary>
@@ -120,7 +113,7 @@ namespace Emir
         {
             return PlayerPrefs.GetInt(CommonTypes.CURRENCY_DATA_KEY);
         }
-    
+        
         
     }
 }

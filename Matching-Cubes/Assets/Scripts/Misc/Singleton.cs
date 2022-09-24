@@ -58,6 +58,7 @@ namespace Emir
             }
             else
             {
+                
                 Destroy ( gameObject );
             }
         }
