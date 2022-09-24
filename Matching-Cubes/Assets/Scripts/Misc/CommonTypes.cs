@@ -25,6 +25,14 @@ namespace Emir
         public static string VIBRATION_STATE_KEY = "vibration_state_data";
         public static string CURRENCY_DATA_KEY = "Currency";
 
+        //ANIMATION KEYS
+
+        public static string IDLE_KEY = "Idle";
+        public static string RUN_KEY = "Run";
+        public static string FALLING_KEY = "Falling";
+        public static string DANCE_KEY = "Dance";
+        public static string DEFEAT_KEY = "Defeat";
+
 #if UNITY_EDITOR
 
         public static string EDITOR_LEVELS_PATH = "Levels/";

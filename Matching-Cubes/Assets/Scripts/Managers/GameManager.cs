@@ -47,6 +47,7 @@ namespace Emir
         {
             ChangeGameState(EGameState.STARTED);
             InterfaceManager.Instance.OnGameStateChanged(GetGameState());
+            PlayerController.Instance.PlayAnimation(CommonTypes.RUN_KEY);
         }
         
         /// <summary>

@@ -6,10 +6,13 @@ using Emir;
 
 public class PlayerView : MonoBehaviour
 {
+    #region Serializable Fields
     [SerializeField] private float verticalSpeed;
     [SerializeField] private float horizontalSpeed;
     [SerializeField] private float playerBorder = 5.5f;
-
+    
+    #endregion
+    
     private Vector3 Pos
     {
         get => transform.position;
@@ -35,6 +38,10 @@ public class PlayerView : MonoBehaviour
         SetBorder();
     }
 
+
+    
+   
+    
     #region Movement
 
     /// <summary>
@@ -80,6 +87,7 @@ public class PlayerView : MonoBehaviour
             Pos = new Vector3(playerBorder, Pos.y, Pos.z);
         }
     }
+    
 
     #endregion
 }

@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace Emir
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Singleton<PlayerController>
     {
+        [SerializeField] private Animator m_animator;
         private int Currency;
 
         private void Awake()
@@ -44,5 +45,29 @@ namespace Emir
         {
             return Currency >= targetAmount;
         }
+        
+        #region Animation
+
+        public void PlayAnimation(string key)
+        {
+            GetAnimator().SetBool(key,true);
+        }
+
+        public void StopAnimation(string key)
+        {
+            GetAnimator().SetBool(key,false);
+        }
+
+        #endregion
+        
+        #region Getters
+
+        private Animator GetAnimator()
+        {
+            return m_animator;
+        }
+    
+
+        #endregion
     }
 }
