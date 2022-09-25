@@ -110,23 +110,26 @@ public class PlayerView : MonoBehaviour
     private void MatchCubesControl()
     {
         if (GetCubes().Count < 3) return;
-
         for (int i = GetCubes().Count - 1; i >= 0; i--)
         {
-            if (i < 3) break;
+            if (i < 2) break;
             EColorType CurrentColor = GetCubes()[i].GetColor();
             EColorType NextColor = GetCubes()[i - 1].GetColor();
             EColorType TwoNextColor = GetCubes()[i - 2].GetColor();
-            if (CurrentColor == NextColor&& CurrentColor==TwoNextColor)
+            if (CurrentColor == NextColor && CurrentColor==TwoNextColor)
             {
-                //Match.............
-                Debug.Log("MATCHHH");
+                Match();
             }
             else
             {
                 return;
             }
         }
+    }
+
+    private void Match()
+    {
+        
     }
 
     #endregion
