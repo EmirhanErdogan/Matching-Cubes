@@ -187,6 +187,12 @@ public class PlayerView : MonoBehaviour
         DOVirtual.DelayedCall(GameManager.Instance.GetGameSettings().SpeedUpDuration, () => { m_speed = BaseSpeed; });
     }
 
+    public void Jump(Transform TargetTransform)
+    {
+        transform.DOJump(TargetTransform.position, GameManager.Instance.GetGameSettings().JumpPower, 1,
+            GameManager.Instance.GetGameSettings().JumpDuration);
+    }
+
     /// <summary>
     /// This Funciton Helper For Vertical Movement.
     /// </summary>
@@ -240,6 +246,18 @@ public class PlayerView : MonoBehaviour
         CollectCube(Target);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(CommonTypes.JUMP_TAG))
+        {
+            Jump(other.gameObject.GetComponent<RampComponent>().GetTargetPos());
+        }
+        else if (other.gameObject.CompareTag(CommonTypes.SPEED_UP_TAG))
+        {
+            SpeedUp();
+        }
+    }
+
     private void CollectCube(Collision Target)
     {
         if (Target.gameObject.CompareTag(CommonTypes.COLLECTABLE_TAG))
@@ -253,6 +271,7 @@ public class PlayerView : MonoBehaviour
             MatchCubesControl();
         }
     }
+    
 
     #endregion
 }

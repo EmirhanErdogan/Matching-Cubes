@@ -20,6 +20,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5da6aebb8407bd346a817b923dd901f9, type: 2}
   SpeedUpDuration: 3
   SpeedUpMultiply: 2
+  JumpPower: 10
+  JumpDuration: 2.5
   PunchScaleMultiply: 0.2
   PunchScaleDuration: 0.5
   PunchPositionMultiply: 0.15

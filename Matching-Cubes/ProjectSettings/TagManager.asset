@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Collectable
   - Collect
+  - Jump
+  - SpeedUp
   layers:
   - Default
   - TransparentFX
