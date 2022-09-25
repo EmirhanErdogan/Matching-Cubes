@@ -182,7 +182,6 @@ public class PlayerView : MonoBehaviour
 
     public void SpeedUp()
     {
-        Debug.Log("control");
         float BaseSpeed = m_speed;
         m_speed *= GameManager.Instance.GetGameSettings().SpeedUpMultiply;
         DOVirtual.DelayedCall(GameManager.Instance.GetGameSettings().SpeedUpDuration, () => { m_speed = BaseSpeed; });
