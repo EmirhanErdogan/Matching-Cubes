@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -66,7 +68,7 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    private void SortCubePos()
+    private async UniTask SortCubePos(float Duration = 0f)
     {
         Vector3 targetPos = Vector3.zero;
         float JumpPower = 1;
@@ -76,15 +78,20 @@ public class PlayerView : MonoBehaviour
             targetPos = Vector3.up * GetCubes()[i].GetCubeIndex() * GetCubes()[i].transform.localPosition.y * 2;
             JumpPower += multiply;
             GetCubes()[i].SetCubePos(targetPos, JumpPower,
-                GameManager.Instance.GetGameSettings().PunchPositionDuration);
+                GameManager.Instance.GetGameSettings().PunchPositionDuration, Duration);
         }
 
         targetPos += Vector3.up * GetCubes()[0].transform.localPosition.y * 2;
         JumpPower += multiply;
-        GetCharacter().localPosition = targetPos;
-        GetCharacter().DOPunchPosition(Vector3.up * JumpPower,
-            GameManager.Instance.GetGameSettings().PunchPositionDuration,
-            0, 0);
+        // GetCharacter().localPosition = targetPos;
+        // GetCharacter().DOPunchPosition(Vector3.up * JumpPower,
+        //     GameManager.Instance.GetGameSettings().PunchPositionDuration,
+        //     0, 0);
+        GetCharacter().DOLocalMove(targetPos, Duration).OnComplete(() =>
+        {
+            GetCharacter().DOPunchPosition(Vector3.up * JumpPower, GameManager.Instance.GetGameSettings().PunchPositionDuration,
+                0, 0);
+        });
     }
 
     public void AddCubes(CubeComponent Cube)
@@ -116,9 +123,10 @@ public class PlayerView : MonoBehaviour
             EColorType CurrentColor = GetCubes()[i].GetColor();
             EColorType NextColor = GetCubes()[i - 1].GetColor();
             EColorType TwoNextColor = GetCubes()[i - 2].GetColor();
-            if (CurrentColor == NextColor && CurrentColor==TwoNextColor)
+            if (CurrentColor == NextColor && CurrentColor == TwoNextColor)
             {
-                Match();
+                CubeComponent[] matchcubes = { GetCubes()[i], GetCubes()[i - 1], GetCubes()[i - 2] };
+                Match(matchcubes);
             }
             else
             {
@@ -127,9 +135,27 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    private void Match()
+    private void Match(CubeComponent[] Cubes)
     {
-        
+        foreach (CubeComponent Cube in Cubes)
+        {
+            Cube.MatchCube();
+        }
+
+        DOVirtual.DelayedCall(0.5f, () =>
+        {
+            foreach (CubeComponent Cube in Cubes)
+            {
+                Cube.GetRoot().DOScale(0.01f, 0.375f);
+                RemoveCubes(Cube);
+                Cube.GetRoot().SetParent(null);
+                Cube.GetRoot().transform.position = Vector3.zero;
+            }
+
+            SortCubeIndex();
+            _ = SortCubePos(0.75f);
+            SpeedUp();
+        });
     }
 
     #endregion
@@ -154,6 +180,18 @@ public class PlayerView : MonoBehaviour
     #endregion
 
     #region Movement
+
+    public void SpeedUp()
+    {
+        // float SpeedUpTime = Time.time + GameManager.Instance.GetGameSettings().SpeedUpDuration;
+        // float BaseSpeedValue = m_speed;
+        // while (Time.time < SpeedUpTime)
+        // {
+        //     m_speed *= GameManager.Instance.GetGameSettings().SpeedUpMultiply;
+        // }
+        
+        
+    }
 
     /// <summary>
     /// This Funciton Helper For Vertical Movement.
@@ -216,7 +254,7 @@ public class PlayerView : MonoBehaviour
             TargetCube.CollectCube();
             AddCubes(TargetCube);
             SortCubeIndex();
-            SortCubePos();
+            _ = SortCubePos();
             OpenLastCubeTrail();
             MatchCubesControl();
         }

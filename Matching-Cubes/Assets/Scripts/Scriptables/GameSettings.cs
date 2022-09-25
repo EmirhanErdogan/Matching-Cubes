@@ -9,12 +9,15 @@ namespace Emir
         [Header("Datas")]
         [ContextMenuItem("Update","FindLevels")]
         public Level[] Levels;
-        
+
+        public float SpeedUpDuration;
+        public float SpeedUpMultiply;
         [Header("Cube Settings")]
         public float PunchScaleMultiply;
         public float PunchScaleDuration;
         public float PunchPositionMultiply;
         public float PunchPositionDuration;
+        public Color MatchColor;
         public Material MatchMaterial;
 
 

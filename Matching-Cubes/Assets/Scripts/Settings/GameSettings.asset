@@ -22,4 +22,5 @@ MonoBehaviour:
   PunchScaleDuration: 0.5
   PunchPositionMultiply: 0.15
   PunchPositionDuration: 0.5
+  MatchColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
   MatchMaterial: {fileID: 2100000, guid: 2aa7f6eb89af165438f14cf153dd0f89, type: 2}

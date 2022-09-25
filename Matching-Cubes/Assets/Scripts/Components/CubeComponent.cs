@@ -31,11 +31,14 @@ public class CubeComponent : MonoBehaviour
         GetRoot().DOPunchScale(Vector3.one * gameSettings.PunchScaleMultiply, gameSettings.PunchScaleDuration, 0, 0);
         gameObject.tag = CommonTypes.COLLECT_TAG;
     }
-    public void SetCubePos(Vector3 Pos,float JumpPower,float Duration)
+    public void SetCubePos(Vector3 Pos,float JumpPower,float Duration,float MoveDuration)
     {
-        GetRoot().localPosition = Pos;
-        GetRoot().DOPunchPosition(Vector3.up * JumpPower, Duration,
-            0, 0);
+        GetRoot().DOLocalMove(Pos, MoveDuration).OnComplete(() =>
+        {
+            GetRoot().DOPunchPosition(Vector3.up * JumpPower, Duration,
+                0, 0);
+        });
+        
     }
     public void SetCubeIndex(int Value )
     {
@@ -63,6 +66,16 @@ public class CubeComponent : MonoBehaviour
     public TrailRenderer GetTrail()
     {
         return m_trail;
+    }
+
+    public void MatchCube()
+    {
+        Color maincolor = GetComponent<MeshRenderer>().material.color;
+        Color targetcolor = GameManager.Instance.GetGameSettings().MatchColor;
+        GameManager.Instance.GetGameSettings().MatchMaterial.color = maincolor;
+        GetComponent<MeshRenderer>().material = GameManager.Instance.GetGameSettings().MatchMaterial;
+        GameManager.Instance.GetGameSettings().MatchMaterial.DOColor(GameManager.Instance.GetGameSettings().MatchColor, 0.5f);
+
     }
     
 }

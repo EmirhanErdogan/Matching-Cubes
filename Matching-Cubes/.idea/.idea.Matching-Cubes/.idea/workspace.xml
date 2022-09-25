@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="989fae4b-30c1-40e4-a435-1c702e1910ce" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Matching-Cubes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Matching-Cubes/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Cube/Cube_Match_Mat_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Cube/Cube_Match_Mat_01.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/CubeComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/CubeComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Scriptables/GameSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Scriptables/GameSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Settings/GameSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Settings/GameSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/PlayerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/PlayerView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +93,7 @@
       <workItem from="1664019926282" duration="12578000" />
       <workItem from="1664063828681" duration="223000" />
       <workItem from="1664100101647" duration="4944000" />
-      <workItem from="1664111792299" duration="8740000" />
+      <workItem from="1664111792299" duration="11791000" />
     </task>
     <servers />
   </component>
