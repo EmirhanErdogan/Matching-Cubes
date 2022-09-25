@@ -38,6 +38,7 @@ public class PlayerView : MonoBehaviour
 
     private Vector3 LastPos;
     private Vector3 movedPos;
+    private List<CubeComponent> RefCubes = new List<CubeComponent>();
 
     #endregion
 
@@ -64,52 +65,46 @@ public class PlayerView : MonoBehaviour
         
             int Index = 0;
             GetCubes().Clear();
-            List<CubeComponent> RefCubes = GetCubes();
-            CubeComponent[] CubeColorOne = GetCubes().FindAll(x => x.GetColor() == EColorType.COLOR1).ToArray();
+            Debug.Log(RefCubes.Count);
+            CubeComponent[] CubeColorOne = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR1).ToArray();
             Debug.Log(CubeColorOne.Length);
             if (CubeColorOne.Length > 0)
             {
-                
                 for (int i = 0; i < CubeColorOne.Length; i++)
                 {
                     CubeColorOne[i].SetCubeIndex(Index);
-                    AddCubes(CubeColorOne[i]);
+                    AddCubes(CubeColorOne[i],false);
                     Index++;
                 }
             }
-            CubeComponent[] CubeColorTwo = GetCubes().FindAll(x => x.GetColor() == EColorType.COLOR2).ToArray();
+            CubeComponent[] CubeColorTwo = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR2).ToArray();
             Debug.Log(CubeColorTwo.Length);
             if (CubeColorTwo.Length>0)
             {
-                
                 for (int i = 0; i < CubeColorTwo.Length; i++)
                 {
                     CubeColorTwo[i].SetCubeIndex(Index);
-                    AddCubes(CubeColorTwo[i]);
+                    AddCubes(CubeColorTwo[i],false);
                     Index++;
                 }
             }
-            CubeComponent[] CubeColorThree = GetCubes().FindAll(x => x.GetColor() == EColorType.COLOR3).ToArray();
+            CubeComponent[] CubeColorThree = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR3).ToArray();
             Debug.Log(CubeColorThree.Length);
             if (CubeColorThree.Length>0)
             {
-                
                 for (int i = 0; i < CubeColorThree.Length; i++)
                 {
                     CubeColorThree[i].SetCubeIndex(Index);
-                    AddCubes(CubeColorThree[i]);
+                    AddCubes(CubeColorThree[i],false);
                     Index++;
                 }
             }
-            SortCubePos();
             MatchCubesControl();
-
-
-        
     }
 
     private void RandomCubes()
     {
+        
     }
 
     private void SortCubeIndex()
@@ -154,9 +149,11 @@ public class PlayerView : MonoBehaviour
         });
     }
 
-    public void AddCubes(CubeComponent Cube)
+    public void AddCubes(CubeComponent Cube, bool Value=true)
     {
         GetCubes().Add(Cube);
+        if (Value is false) return;
+        RefCubes.Add(Cube);
     }
 
     public void RemoveCubes(CubeComponent Cube)
@@ -190,7 +187,7 @@ public class PlayerView : MonoBehaviour
             }
             else
             {
-                return;
+                continue;
             }
         }
     }
@@ -214,7 +211,7 @@ public class PlayerView : MonoBehaviour
 
             SortCubeIndex();
             SortCubePos(0.75f);
-            SpeedUp();
+            // SpeedUp();
         });
     }
 
@@ -319,10 +316,13 @@ public class PlayerView : MonoBehaviour
         }
         else if (other.gameObject.CompareTag(CommonTypes.RANDOM_GATE))
         {
+            RandomCubes();
+            other.gameObject.GetComponent<Collider>().enabled = false;
         }
         else if (other.gameObject.CompareTag(CommonTypes.ORDER_GATE))
         {
             OrderCubes();
+            other.gameObject.GetComponent<Collider>().enabled = false;
         }
     }
 
