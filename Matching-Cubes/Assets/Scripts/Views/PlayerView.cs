@@ -9,6 +9,7 @@ using Vector3 = UnityEngine.Vector3;
 using Emir;
 using Unity.VisualScripting;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class PlayerView : MonoBehaviour
 {
@@ -62,49 +63,75 @@ public class PlayerView : MonoBehaviour
 
     private void OrderCubes()
     {
-        
-            int Index = 0;
-            GetCubes().Clear();
-            Debug.Log(RefCubes.Count);
-            CubeComponent[] CubeColorOne = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR1).ToArray();
-            Debug.Log(CubeColorOne.Length);
-            if (CubeColorOne.Length > 0)
+        int Index = 0;
+        GetCubes().Clear();
+        Debug.Log(RefCubes.Count);
+        CubeComponent[] CubeColorOne = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR1).ToArray();
+        Debug.Log(CubeColorOne.Length);
+        if (CubeColorOne.Length > 0)
+        {
+            for (int i = 0; i < CubeColorOne.Length; i++)
             {
-                for (int i = 0; i < CubeColorOne.Length; i++)
-                {
-                    CubeColorOne[i].SetCubeIndex(Index);
-                    AddCubes(CubeColorOne[i],false);
-                    Index++;
-                }
+                CubeColorOne[i].SetCubeIndex(Index);
+                AddCubes(CubeColorOne[i], false);
+                Index++;
             }
-            CubeComponent[] CubeColorTwo = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR2).ToArray();
-            Debug.Log(CubeColorTwo.Length);
-            if (CubeColorTwo.Length>0)
+        }
+
+        CubeComponent[] CubeColorTwo = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR2).ToArray();
+        Debug.Log(CubeColorTwo.Length);
+        if (CubeColorTwo.Length > 0)
+        {
+            for (int i = 0; i < CubeColorTwo.Length; i++)
             {
-                for (int i = 0; i < CubeColorTwo.Length; i++)
-                {
-                    CubeColorTwo[i].SetCubeIndex(Index);
-                    AddCubes(CubeColorTwo[i],false);
-                    Index++;
-                }
+                CubeColorTwo[i].SetCubeIndex(Index);
+                AddCubes(CubeColorTwo[i], false);
+                Index++;
             }
-            CubeComponent[] CubeColorThree = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR3).ToArray();
-            Debug.Log(CubeColorThree.Length);
-            if (CubeColorThree.Length>0)
+        }
+
+        CubeComponent[] CubeColorThree = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR3).ToArray();
+        Debug.Log(CubeColorThree.Length);
+        if (CubeColorThree.Length > 0)
+        {
+            for (int i = 0; i < CubeColorThree.Length; i++)
             {
-                for (int i = 0; i < CubeColorThree.Length; i++)
-                {
-                    CubeColorThree[i].SetCubeIndex(Index);
-                    AddCubes(CubeColorThree[i],false);
-                    Index++;
-                }
+                CubeColorThree[i].SetCubeIndex(Index);
+                AddCubes(CubeColorThree[i], false);
+                Index++;
             }
-            MatchCubesControl();
+        }
+
+        MatchCubesControl();
+        RefCubes.Clear();
+        foreach (CubeComponent Cube in GetCubes())
+        {
+            RefCubes.Add(Cube);
+        }
     }
 
     private void RandomCubes()
     {
-        
+        foreach (CubeComponent Cube in GetCubes())
+        {
+            int rnd = Random.Range(0, GetCubes().Count);
+            Cube.SetCubeIndex(rnd);
+        }
+
+        foreach (CubeComponent Cube in GetCubes())
+        {
+            int Index = Cube.GetCubeIndex();
+            foreach (CubeComponent _cube in GetCubes())
+            {
+                if (Cube != _cube)
+                {
+                    if (Cube.GetCubeIndex() == _cube.GetCubeIndex())
+                    {
+                        RandomCubes();
+                    }
+                }
+            }
+        }
     }
 
     private void SortCubeIndex()
@@ -149,7 +176,7 @@ public class PlayerView : MonoBehaviour
         });
     }
 
-    public void AddCubes(CubeComponent Cube, bool Value=true)
+    public void AddCubes(CubeComponent Cube, bool Value = true)
     {
         GetCubes().Add(Cube);
         if (Value is false) return;

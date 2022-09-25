@@ -2370,7 +2370,6 @@ GameObject:
   - component: {fileID: 760276728}
   - component: {fileID: 760276729}
   - component: {fileID: 760276730}
-  - component: {fileID: 760276734}
   - component: {fileID: 760276732}
   - component: {fileID: 760276733}
   m_Layer: 0
@@ -2459,24 +2458,6 @@ CapsuleCollider:
   m_Height: 3.965907
   m_Direction: 1
   m_Center: {x: 0.040723205, y: 2.0398917, z: -0.020629585}
---- !u!114 &760276734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 760276727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf97be527a76f6e4999e032f21b22a03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Index: 0
-  m_root: {fileID: 0}
-  m_trail: {fileID: 0}
-  m_type: 0
-  m_trailMat: {fileID: 0}
-  m_material: {fileID: 0}
 --- !u!1 &805974137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7188,7 +7169,7 @@ PrefabInstance:
     - target: {fileID: 1444557990445001411, guid: 13c06f50e4977b943aa2aef97afa17fa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1444557990445001411, guid: 13c06f50e4977b943aa2aef97afa17fa,
         type: 3}
@@ -8216,7 +8197,7 @@ PrefabInstance:
     - target: {fileID: 7126928530476695033, guid: 80c49322171c37e44b20477bffd03bff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7126928530476695033, guid: 80c49322171c37e44b20477bffd03bff,
         type: 3}
