@@ -7,6 +7,7 @@ using DG.Tweening;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Emir;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 public class PlayerView : MonoBehaviour
@@ -60,6 +61,7 @@ public class PlayerView : MonoBehaviour
 
     private void SortCubeIndex()
     {
+        if (GetCubes().Count < 1) return;
         int index = 0;
         for (int i = GetCubes().Count - 1; i >= 0; i--)
         {
@@ -68,7 +70,7 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    private async UniTask SortCubePos(float Duration = 0f)
+    private void SortCubePos(float Duration = 0f)
     {
         Vector3 targetPos = Vector3.zero;
         float JumpPower = 1;
@@ -80,16 +82,13 @@ public class PlayerView : MonoBehaviour
             GetCubes()[i].SetCubePos(targetPos, JumpPower,
                 GameManager.Instance.GetGameSettings().PunchPositionDuration, Duration);
         }
-
-        targetPos += Vector3.up * GetCubes()[0].transform.localPosition.y * 2;
+        if(GetCubes().Count>0){targetPos += Vector3.up * GetCubes()[0].transform.localPosition.y * 2; }
+        else {targetPos=Vector3.zero;}
         JumpPower += multiply;
-        // GetCharacter().localPosition = targetPos;
-        // GetCharacter().DOPunchPosition(Vector3.up * JumpPower,
-        //     GameManager.Instance.GetGameSettings().PunchPositionDuration,
-        //     0, 0);
         GetCharacter().DOLocalMove(targetPos, Duration).OnComplete(() =>
         {
-            GetCharacter().DOPunchPosition(Vector3.up * JumpPower, GameManager.Instance.GetGameSettings().PunchPositionDuration,
+            GetCharacter().DOPunchPosition(Vector3.up * JumpPower,
+                GameManager.Instance.GetGameSettings().PunchPositionDuration,
                 0, 0);
         });
     }
@@ -153,7 +152,7 @@ public class PlayerView : MonoBehaviour
             }
 
             SortCubeIndex();
-            _ = SortCubePos(0.75f);
+             SortCubePos(0.75f);
             SpeedUp();
         });
     }
@@ -183,14 +182,10 @@ public class PlayerView : MonoBehaviour
 
     public void SpeedUp()
     {
-        // float SpeedUpTime = Time.time + GameManager.Instance.GetGameSettings().SpeedUpDuration;
-        // float BaseSpeedValue = m_speed;
-        // while (Time.time < SpeedUpTime)
-        // {
-        //     m_speed *= GameManager.Instance.GetGameSettings().SpeedUpMultiply;
-        // }
-        
-        
+        Debug.Log("control");
+        float BaseSpeed = m_speed;
+        m_speed *= GameManager.Instance.GetGameSettings().SpeedUpMultiply;
+        DOVirtual.DelayedCall(GameManager.Instance.GetGameSettings().SpeedUpDuration, () => { m_speed = BaseSpeed; });
     }
 
     /// <summary>
@@ -254,7 +249,7 @@ public class PlayerView : MonoBehaviour
             TargetCube.CollectCube();
             AddCubes(TargetCube);
             SortCubeIndex();
-            _ = SortCubePos();
+             SortCubePos();
             OpenLastCubeTrail();
             MatchCubesControl();
         }
