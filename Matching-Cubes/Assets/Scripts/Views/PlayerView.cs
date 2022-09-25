@@ -59,6 +59,16 @@ public class PlayerView : MonoBehaviour
 
     #region Cubes
 
+
+    private void OrderCubes()
+    {
+        
+    }
+
+    private void RandomCubes()
+    {
+        
+    }
     private void SortCubeIndex()
     {
         if (GetCubes().Count < 1) return;
@@ -255,6 +265,14 @@ public class PlayerView : MonoBehaviour
         else if (other.gameObject.CompareTag(CommonTypes.SPEED_UP_TAG))
         {
             SpeedUp();
+        }
+        else if (other.gameObject.CompareTag(CommonTypes.RANDOM_GATE))
+        {
+            
+        }
+        else if (other.gameObject.CompareTag(CommonTypes.ORDER_GATE))
+        {
+            
         }
     }
 

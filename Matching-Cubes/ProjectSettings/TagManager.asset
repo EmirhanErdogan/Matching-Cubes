@@ -8,6 +8,8 @@ TagManager:
   - Collect
   - Jump
   - SpeedUp
+  - Gate/RandomGate
+  - Gate/OrderGate
   layers:
   - Default
   - TransparentFX
