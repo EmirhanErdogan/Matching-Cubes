@@ -33,6 +33,10 @@ namespace Emir
         public static string DANCE_KEY = "Dance";
         public static string DEFEAT_KEY = "Defeat";
 
+        //TAGS
+        public static string COLLECTABLE_TAG = "Collectable";
+        public static string COLLECT_TAG = "Collect";
+
 #if UNITY_EDITOR
 
         public static string EDITOR_LEVELS_PATH = "Levels/";
@@ -74,6 +78,16 @@ namespace Emir
             tempPosition.y -= canvas.sizeDelta.y * canvas.pivot.y;
 
             return tempPosition;
+        }
+
+        public static void OpenTrail(this TrailRenderer Trail)
+        {
+            Trail.emitting = true;
+        }
+
+        public static void CloseTrail(this TrailRenderer Trail)
+        {
+            Trail.emitting = false;
         }
     }
 }

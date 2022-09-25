@@ -6,10 +6,10 @@ namespace Emir
     {
         #region Serializable Fields
         
-        [Header("Controllers")] 
-        [SerializeField] private GameSettings m_gameSettings;
-        
+        [Header("Controllers")]
         [SerializeField] private PlayerView m_playerView;
+        [SerializeField] private PlayerController m_playerController;
+        [SerializeField] private GameSettings m_gameSettings;
         
         #endregion
         #region Private Fields
@@ -84,6 +84,15 @@ namespace Emir
         public PlayerView GetPlayerView()
         {
             return m_playerView;
+        }
+
+        /// <summary>
+        /// This function returns related player Controller component.
+        /// </summary>
+        /// <returns></returns>
+        public PlayerController GetPlayerController()
+        {
+            return m_playerController;
         }
         
         /// <summary>

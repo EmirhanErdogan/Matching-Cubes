@@ -18,3 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 424e5038f07241f4a977d7820acd55ee, type: 2}
   - {fileID: 11400000, guid: 075bd056e5f4bc3498227fc144eb8569, type: 2}
   - {fileID: 11400000, guid: 5da6aebb8407bd346a817b923dd901f9, type: 2}
+  PunchScaleMultiply: 0.2
+  PunchScaleDuration: 0.5
+  PunchPositionMultiply: 0.15
+  PunchPositionDuration: 0.5
