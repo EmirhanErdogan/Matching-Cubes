@@ -40,6 +40,8 @@ namespace Emir
         public static string SPEED_UP_TAG = "SpeedUp";
         public static string RANDOM_GATE = "Gate/RandomGate";
         public static string ORDER_GATE = "Gate/OrderGate";
+        public static string OBSTACLE_TAG = "Obstacle";
+        public static string LAVA_TAG = "Lava";
 
 #if UNITY_EDITOR
 

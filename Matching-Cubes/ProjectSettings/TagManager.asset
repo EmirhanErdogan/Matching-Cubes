@@ -10,6 +10,8 @@ TagManager:
   - SpeedUp
   - Gate/RandomGate
   - Gate/OrderGate
+  - Lava
+  - Obstacle
   layers:
   - Default
   - TransparentFX

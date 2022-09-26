@@ -39,7 +39,7 @@ public class PlayerView : MonoBehaviour
 
     private Vector3 LastPos;
     private Vector3 movedPos;
-    private List<CubeComponent> RefCubes = new List<CubeComponent>();
+    public List<CubeComponent> RefCubes = new List<CubeComponent>();
 
     #endregion
 
@@ -65,9 +65,7 @@ public class PlayerView : MonoBehaviour
     {
         int Index = 0;
         GetCubes().Clear();
-        Debug.Log(RefCubes.Count);
         CubeComponent[] CubeColorOne = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR1).ToArray();
-        Debug.Log(CubeColorOne.Length);
         if (CubeColorOne.Length > 0)
         {
             for (int i = 0; i < CubeColorOne.Length; i++)
@@ -79,7 +77,6 @@ public class PlayerView : MonoBehaviour
         }
 
         CubeComponent[] CubeColorTwo = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR2).ToArray();
-        Debug.Log(CubeColorTwo.Length);
         if (CubeColorTwo.Length > 0)
         {
             for (int i = 0; i < CubeColorTwo.Length; i++)
@@ -91,7 +88,6 @@ public class PlayerView : MonoBehaviour
         }
 
         CubeComponent[] CubeColorThree = RefCubes.FindAll(x => x.GetColor() == EColorType.COLOR3).ToArray();
-        Debug.Log(CubeColorThree.Length);
         if (CubeColorThree.Length > 0)
         {
             for (int i = 0; i < CubeColorThree.Length; i++)
@@ -101,8 +97,9 @@ public class PlayerView : MonoBehaviour
                 Index++;
             }
         }
-
+        SortCubePos();
         MatchCubesControl();
+        // OpenLastCubeTrail();
         RefCubes.Clear();
         foreach (CubeComponent Cube in GetCubes())
         {
@@ -120,7 +117,6 @@ public class PlayerView : MonoBehaviour
 
         foreach (CubeComponent Cube in GetCubes())
         {
-            int Index = Cube.GetCubeIndex();
             foreach (CubeComponent _cube in GetCubes())
             {
                 if (Cube != _cube)
@@ -128,13 +124,31 @@ public class PlayerView : MonoBehaviour
                     if (Cube.GetCubeIndex() == _cube.GetCubeIndex())
                     {
                         RandomCubes();
+                        return;
                     }
                 }
             }
         }
+        int index = RefCubes.Count-1;
+        GetCubes().Clear();
+        for (int i = 0; i < RefCubes.Count; i++)
+        {
+            GetCubes().Add(RefCubes.SingleOrDefault(x => x.GetCubeIndex() == index));
+            index--;
+        }
+        SortCubePos();
+        MatchCubesControl();
+        OpenLastCubeTrail();
+        RefCubes.Clear();
+        foreach (CubeComponent Cube in GetCubes())
+        {
+            RefCubes.Add(Cube);
+        }
+
+
     }
 
-    private void SortCubeIndex()
+    public void SortCubeIndex()
     {
         if (GetCubes().Count < 1) return;
         int index = 0;
@@ -145,7 +159,7 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    private void SortCubePos(float Duration = 0f)
+    public void SortCubePos(float Duration = 0f)
     {
         Vector3 targetPos = Vector3.zero;
         float JumpPower = 1;
@@ -174,6 +188,7 @@ public class PlayerView : MonoBehaviour
                 GameManager.Instance.GetGameSettings().PunchPositionDuration,
                 0, 0);
         });
+        OpenLastCubeTrail();
     }
 
     public void AddCubes(CubeComponent Cube, bool Value = true)
@@ -238,7 +253,8 @@ public class PlayerView : MonoBehaviour
 
             SortCubeIndex();
             SortCubePos(0.75f);
-            // SpeedUp();
+            SpeedUp();
+            OpenLastCubeTrail();
         });
     }
 
@@ -269,6 +285,10 @@ public class PlayerView : MonoBehaviour
     {
         float BaseSpeed = m_speed;
         m_speed *= GameManager.Instance.GetGameSettings().SpeedUpMultiply;
+        if (m_speed > BaseSpeed * GameManager.Instance.GetGameSettings().SpeedUpMultiply)
+        {
+            m_speed = BaseSpeed * GameManager.Instance.GetGameSettings().SpeedUpMultiply;
+        }
         DOVirtual.DelayedCall(GameManager.Instance.GetGameSettings().SpeedUpDuration, () => { m_speed = BaseSpeed; });
     }
 
@@ -366,6 +386,8 @@ public class PlayerView : MonoBehaviour
             MatchCubesControl();
         }
     }
+
+    
 
     #endregion
 }
