@@ -8,6 +8,7 @@ using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Emir;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -21,11 +22,13 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private float m_horizontalSpeed;
     [SerializeField] private float playerBorder = 5.5f;
 
-    [Header("Transforms")] [SerializeField]
-    private Transform m_character;
+    [Space] [SerializeField] private Transform m_character;
 
     [SerializeField] private Transform m_cubeRoot;
     [SerializeField] private List<CubeComponent> m_cubes = new List<CubeComponent>();
+    public List<CubeComponent> RefCubes = new List<CubeComponent>();
+
+    [Header("Particle")] [SerializeField] private ParticleSystem m_windParticle;
 
     #endregion
 
@@ -39,7 +42,8 @@ public class PlayerView : MonoBehaviour
 
     private Vector3 LastPos;
     private Vector3 movedPos;
-    public List<CubeComponent> RefCubes = new List<CubeComponent>();
+
+    private bool IsBridge = false;
 
     #endregion
 
@@ -58,6 +62,14 @@ public class PlayerView : MonoBehaviour
         SetBorder();
     }
 
+    #region Setters
+
+    public void SetIsBridge(bool value)
+    {
+        IsBridge = value;
+    }
+
+    #endregion
 
     #region Cubes
 
@@ -97,9 +109,9 @@ public class PlayerView : MonoBehaviour
                 Index++;
             }
         }
-        SortCubePos();
+
+        // SortCubePos();
         MatchCubesControl();
-        // OpenLastCubeTrail();
         RefCubes.Clear();
         foreach (CubeComponent Cube in GetCubes())
         {
@@ -129,23 +141,23 @@ public class PlayerView : MonoBehaviour
                 }
             }
         }
-        int index = RefCubes.Count-1;
+
+        int index = RefCubes.Count - 1;
         GetCubes().Clear();
         for (int i = 0; i < RefCubes.Count; i++)
         {
             GetCubes().Add(RefCubes.SingleOrDefault(x => x.GetCubeIndex() == index));
             index--;
         }
+
         SortCubePos();
-        MatchCubesControl();
         OpenLastCubeTrail();
+        MatchCubesControl();
         RefCubes.Clear();
         foreach (CubeComponent Cube in GetCubes())
         {
             RefCubes.Add(Cube);
         }
-
-
     }
 
     public void SortCubeIndex()
@@ -205,6 +217,8 @@ public class PlayerView : MonoBehaviour
 
     private void OpenLastCubeTrail()
     {
+        if (GetCubes().Count < 1) return;
+
         foreach (CubeComponent Cube in GetCubes())
         {
             Cube.GetTrail().CloseTrail();
@@ -251,6 +265,12 @@ public class PlayerView : MonoBehaviour
                 Cube.GetRoot().transform.position = Vector3.zero;
             }
 
+            RefCubes.Clear();
+            foreach (CubeComponent Cube in GetCubes())
+            {
+                RefCubes.Add(Cube);
+            }
+
             SortCubeIndex();
             SortCubePos(0.75f);
             SpeedUp();
@@ -277,19 +297,31 @@ public class PlayerView : MonoBehaviour
         return m_cubes;
     }
 
+    private bool GetIsBridge()
+    {
+        return IsBridge;
+    }
+
     #endregion
 
     #region Movement
 
     public void SpeedUp()
     {
+        if (IsBridge is true) return;
         float BaseSpeed = m_speed;
         m_speed *= GameManager.Instance.GetGameSettings().SpeedUpMultiply;
+        m_windParticle.Play();
         if (m_speed > BaseSpeed * GameManager.Instance.GetGameSettings().SpeedUpMultiply)
         {
             m_speed = BaseSpeed * GameManager.Instance.GetGameSettings().SpeedUpMultiply;
         }
-        DOVirtual.DelayedCall(GameManager.Instance.GetGameSettings().SpeedUpDuration, () => { m_speed = BaseSpeed; });
+
+        DOVirtual.DelayedCall(GameManager.Instance.GetGameSettings().SpeedUpDuration, () =>
+        {
+            m_speed = BaseSpeed;
+            m_windParticle.Stop();
+        });
     }
 
     public void Jump(Transform TargetTransform)
@@ -303,6 +335,8 @@ public class PlayerView : MonoBehaviour
     /// </summary>
     private void PlayerVerticalMovement()
     {
+        if (IsBridge is true) return;
+
         transform.Translate(new Vector3(0, 0, m_speed * Time.deltaTime));
     }
 
@@ -311,6 +345,8 @@ public class PlayerView : MonoBehaviour
     /// </summary>
     private void PlayerHorizantalMovement()
     {
+        if (IsBridge is true) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             LastPos = Input.mousePosition;
@@ -386,8 +422,6 @@ public class PlayerView : MonoBehaviour
             MatchCubesControl();
         }
     }
-
-    
 
     #endregion
 }

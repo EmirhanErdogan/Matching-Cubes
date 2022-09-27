@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Emir;
 using UnityEngine;
 
@@ -24,14 +25,15 @@ public class ObstacleComponent : MonoBehaviour
         if (other.gameObject.CompareTag(CommonTypes.COLLECT_TAG))
         {
             if (GetIsActive() is false) return;
-            Debug.Log(other.gameObject.GetComponent<CubeComponent>().GetRoot().gameObject.name);
+            CubeComponent TargetCube = other.gameObject.GetComponent<CubeComponent>();
             SetIsActive(false);
+            TargetCube.GetRoot().SetParent(null);
             other.gameObject.transform.SetParent(null);
-            player.RemoveCubes(other.gameObject.GetComponent<CubeComponent>());
-            player.RefCubes.Remove(other.gameObject.GetComponent<CubeComponent>());
+            player.RemoveCubes(TargetCube);
+            player.RefCubes.Remove(TargetCube);
             player.SortCubeIndex();
-            player.SortCubePos(0.5f);
 
+            DOVirtual.DelayedCall(0.375f, () => { player.SortCubePos(); });
         }
     }
 }

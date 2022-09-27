@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
+using Sequence = DG.Tweening.Sequence;
 
 namespace Emir
 {
@@ -34,6 +36,7 @@ namespace Emir
         public static string DEFEAT_KEY = "Defeat";
 
         //TAGS
+        public static string PLAYER = "Player";
         public static string COLLECTABLE_TAG = "Collectable";
         public static string COLLECT_TAG = "Collect";
         public static string JUMP_TAG = "Jump";

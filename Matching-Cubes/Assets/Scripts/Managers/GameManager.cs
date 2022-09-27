@@ -34,6 +34,8 @@ namespace Emir
         private void InitializeWorld()
         {
             Level currentLevel = LevelService.GetCurrentLevel();
+
+            
             
             ThemeManager.Instance.Initialize(currentLevel.Theme);
             
