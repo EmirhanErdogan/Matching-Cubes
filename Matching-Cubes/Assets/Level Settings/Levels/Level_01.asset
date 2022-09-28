@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 0
   SceneName: Game
   Theme: {fileID: 11400000, guid: bf07e20a14aa3794a8d45198ed686cc1, type: 2}
-  LevelPrefab: {fileID: 0}
+  LevelPrefab: {fileID: 2099520127068539551, guid: 8b581044c686d7148b34fad04c743a43,
+    type: 3}

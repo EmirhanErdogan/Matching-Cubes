@@ -22,9 +22,22 @@ public class ObstacleComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag(CommonTypes.PLAYER))
+        {
+            if (GetIsActive() is false) return;
+            if (player.GetCubes().Count < 1)
+            {
+                GameManager.Instance.ChangeGameState(EGameState.LOSE);
+                InterfaceManager.Instance.OnGameStateChanged(GameManager.Instance.GetGameState());
+                SetIsActive(false);
+                return;
+            }
+        }
+
         if (other.gameObject.CompareTag(CommonTypes.COLLECT_TAG))
         {
             if (GetIsActive() is false) return;
+
             CubeComponent TargetCube = other.gameObject.GetComponent<CubeComponent>();
             SetIsActive(false);
             TargetCube.GetRoot().SetParent(null);

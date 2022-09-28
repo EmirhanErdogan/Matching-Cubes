@@ -1,15 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Emir;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.NCalc;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerView : MonoBehaviour
@@ -61,6 +55,7 @@ public class PlayerView : MonoBehaviour
         PlayerHorizantalMovement();
         SetBorder();
     }
+    
 
     #region Setters
 
@@ -292,7 +287,7 @@ public class PlayerView : MonoBehaviour
         return m_character;
     }
 
-    private List<CubeComponent> GetCubes()
+    public List<CubeComponent> GetCubes()
     {
         return m_cubes;
     }

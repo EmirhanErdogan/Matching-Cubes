@@ -35,7 +35,7 @@ namespace Emir
         {
             Level currentLevel = LevelService.GetCurrentLevel();
 
-            
+            Instantiate(currentLevel.LevelPrefab);
             
             ThemeManager.Instance.Initialize(currentLevel.Theme);
             
@@ -124,6 +124,16 @@ namespace Emir
         public int GetCurreny()
         {
             return PlayerPrefs.GetInt(CommonTypes.CURRENCY_DATA_KEY);
+        }
+
+        public void NextLevel()
+        {
+            LevelService.NextLevel();
+        }
+
+        public void RetryLevel()
+        {
+            LevelService.RetryLevel();
         }
         
         

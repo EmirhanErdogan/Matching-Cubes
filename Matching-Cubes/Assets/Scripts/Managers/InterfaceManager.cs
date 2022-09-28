@@ -25,6 +25,8 @@ namespace Emir
         [SerializeField] private CanvasGroup m_menuCanvasGroup;
         [SerializeField] private CanvasGroup m_gameCanvasGroup;
         [SerializeField] private CanvasGroup m_commonCanvasGroup;
+        [SerializeField] private CanvasGroup m_winCanvasGroup;
+        [SerializeField] private CanvasGroup m_loseCanvasGroup;
 
         [Header("Prefabs")] 
         [SerializeField] private RectTransform m_currencyPrefab;
@@ -109,12 +111,12 @@ namespace Emir
                 break;
             case EGameState.WIN:
     
-                // m_winPanel.Initialize();
+                GameUtils.SwitchCanvasGroup(null,m_winCanvasGroup);
     
                 break;
             case EGameState.LOSE:
                 
-                // m_losePanel.Initialize();
+                GameUtils.SwitchCanvasGroup(null,m_loseCanvasGroup);
                 
                 break;
         }
