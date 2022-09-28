@@ -18,6 +18,11 @@ namespace Emir
             Currency = GameManager.Instance.GetCurreny();
         }
 
+        public void Update()
+        {
+            CheckFinish();
+        }
+
         /// <summary>
         /// This function helper for increase currency.
         /// </summary>
@@ -45,28 +50,48 @@ namespace Emir
         {
             return Currency >= targetAmount;
         }
-        
+
+        private void CheckFinish()
+        {
+            LevelComponent levelComponent = LevelComponent.Instance;
+
+            if (!GameUtils.IsInFrontOfObject(transform, levelComponent.GetFinish().GetRoot()))
+            {
+                if (GameManager.Instance.GetPlayerView().GetCubes().Count > 0)
+                {
+                    GameManager.Instance.ChangeGameState(EGameState.WIN);
+                    GetAnimator().SetBool(CommonTypes.DANCE_KEY, true);
+                }
+                else if (GameManager.Instance.GetPlayerView().GetCubes().Count < 1)
+                {
+                    GameManager.Instance.ChangeGameState(EGameState.LOSE);
+                    GetAnimator().SetBool(CommonTypes.DEFEAT_KEY, true);
+                }
+
+                InterfaceManager.Instance.OnGameStateChanged(GameManager.Instance.GetGameState());
+            }
+        }
+
         #region Animation
 
         public void PlayAnimation(string key)
         {
-            GetAnimator().SetBool(key,true);
+            GetAnimator().SetBool(key, true);
         }
 
         public void StopAnimation(string key)
         {
-            GetAnimator().SetBool(key,false);
+            GetAnimator().SetBool(key, false);
         }
 
         #endregion
-        
+
         #region Getters
 
-        private Animator GetAnimator()
+        public Animator GetAnimator()
         {
             return m_animator;
         }
-    
 
         #endregion
     }

@@ -88,7 +88,13 @@ namespace Emir
 
             return tempPosition;
         }
-
+        
+        public static bool IsInFrontOfObject(Transform a, Transform b)
+        {
+            Vector3 localTarget = a.InverseTransformPoint((b.position));
+            return localTarget.z > 0F;
+        }
+        
         public static void OpenTrail(this TrailRenderer Trail)
         {
             Trail.emitting = true;

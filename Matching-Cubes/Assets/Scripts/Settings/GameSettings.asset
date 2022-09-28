@@ -16,8 +16,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c9685c58189ec6f49b4ce7317a930a57, type: 2}
   - {fileID: 11400000, guid: b421fff878cd4194fa5a2139a2aedba6, type: 2}
   - {fileID: 11400000, guid: 424e5038f07241f4a977d7820acd55ee, type: 2}
-  - {fileID: 11400000, guid: 075bd056e5f4bc3498227fc144eb8569, type: 2}
-  - {fileID: 11400000, guid: 5da6aebb8407bd346a817b923dd901f9, type: 2}
   SpeedUpDuration: 3
   SpeedUpMultiply: 2
   JumpPower: 10

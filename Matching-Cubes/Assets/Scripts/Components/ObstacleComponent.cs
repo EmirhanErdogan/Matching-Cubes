@@ -27,6 +27,7 @@ public class ObstacleComponent : MonoBehaviour
             if (GetIsActive() is false) return;
             if (player.GetCubes().Count < 1)
             {
+                GameManager.Instance.GetPlayerController().GetAnimator().SetBool(CommonTypes.DEFEAT_KEY, true);
                 GameManager.Instance.ChangeGameState(EGameState.LOSE);
                 InterfaceManager.Instance.OnGameStateChanged(GameManager.Instance.GetGameState());
                 SetIsActive(false);

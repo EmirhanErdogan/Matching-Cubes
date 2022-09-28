@@ -6,13 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="989fae4b-30c1-40e4-a435-1c702e1910ce" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Matching-Cubes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Matching-Cubes/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_01.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_01.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Controller/Character_Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Controller/Character_Controller.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels(GameObject)/Level_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Level Settings/Levels(GameObject)/Level_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_02.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_02.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_03.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_03.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_04.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_04.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_05.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Settings/Levels/Level_05.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Bridge.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Bridge.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Finish (1).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Finish (1).prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/LevelComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/LevelComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/ObstacleComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/ObstacleComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/InterfaceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/InterfaceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/PlayerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/PlayerView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/CommonTypes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/CommonTypes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Settings/GameSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Settings/GameSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +31,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1332c534a8a44623b2e5cc943a0b790e157400/05/15acd0ae/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Components/BridgeComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Components/FinishComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Components/LevelComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Components/ObstacleComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Components/RampComponent.cs" root0="FORCE_HIGHLIGHTING" />
@@ -109,6 +119,7 @@
       <workItem from="1664317347838" duration="2539000" />
       <workItem from="1664321797884" duration="2119000" />
       <workItem from="1664324052162" duration="1609000" />
+      <workItem from="1664330903003" duration="1798000" />
     </task>
     <servers />
   </component>
